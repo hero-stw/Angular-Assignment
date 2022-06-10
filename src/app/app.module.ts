@@ -20,6 +20,7 @@ import { SigninComponent } from './pages/auth/signin/signin.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { ProductListComponent } from './components/client/product-list/product-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,11 +41,12 @@ import { ProductListComponent } from './components/client/product-list/product-l
     SigninComponent,
     SignupComponent,
     AuthLayoutComponent,
-    ProductListComponent,
+    ProductListComponent,  
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
