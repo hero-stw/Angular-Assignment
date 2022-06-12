@@ -13,6 +13,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminVerifyGuard } from './guards/admin-verify.guard';
+import { CateListComponent } from './pages/admin/admin-category/cate-list/cate-list.component';
+import { CateFormComponent } from './pages/admin/admin-category/cate-form/cate-form.component';
 
 const routes: Routes = [
   {
@@ -68,7 +70,23 @@ const routes: Routes = [
           },
         ]
       },
-      
+      {
+        path: 'category',
+        children: [
+          {
+            path: '',
+            component: CateListComponent,
+          },
+          {
+            path: 'create',
+            component: CateFormComponent
+          },
+          {
+            path: ':_id',
+            component: CateFormComponent
+          }
+        ]
+      }
     ]
   },
   {

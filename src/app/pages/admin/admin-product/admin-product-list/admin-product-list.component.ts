@@ -54,7 +54,7 @@ export class AdminProductListComponent implements OnInit {
       if (result.isConfirmed && id) {
         Swal.fire(
           'Deleted!',
-          'Your file has been deleted.',
+          'Your book has been deleted.',
           'success'
         )
         this.bookService.deleteBook(id).subscribe(data => {

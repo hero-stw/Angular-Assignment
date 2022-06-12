@@ -22,7 +22,8 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { ProductListComponent } from './components/client/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CateListComponent } from './pages/admin/admin-category/cate-list/cate-list.component';
+import { CateFormComponent } from './pages/admin/admin-category/cate-form/cate-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     SigninComponent,
     SignupComponent,
     AuthLayoutComponent,
-    ProductListComponent,  
+    ProductListComponent,
+    CateListComponent,
+    CateFormComponent,  
     
   ],
   imports: [
@@ -50,8 +53,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
-    CKEditorModule
+    ReactiveFormsModule
   ],
   providers: [
 
