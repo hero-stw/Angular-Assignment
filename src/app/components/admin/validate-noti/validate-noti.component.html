@@ -1,0 +1,20 @@
+<span
+  *ngIf="(field.dirty || field.touched) && field.errors?.['required']"
+  class="mt-2 text-sm text-red-600 dark:text-red-500 font-medium"
+>
+  {{ key }} is required
+</span>
+<span
+  *ngIf="(field.dirty || field.touched) && field.errors?.['minlength']"
+  class="mt-2 text-sm text-red-600 dark:text-red-500 font-medium"
+>
+  {{ key }} requires minimum of
+  {{field.errors?.['minlength'].requiredLength}} characters.
+</span>
+<span
+  *ngIf="(field.dirty || field.touched) && field.errors?.['maxlength']"
+  class="mt-2 text-sm text-red-600 dark:text-red-500 font-medium"
+>
+  {{ key }} requires maximum of
+  {{field.errors?.['maxlength'].requiredLength}} characters.
+</span>

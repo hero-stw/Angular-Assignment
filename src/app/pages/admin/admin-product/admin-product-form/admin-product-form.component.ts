@@ -102,15 +102,16 @@ export class AdminProductFormComponent implements OnInit {
   onSubmit() {
     const submitData = this.productForm.value;
 
-    if (this.id !== '' || this.id !== undefined) {
-      return this.bookService.updateBook(this.id, {
+    if (this.id === '' || this.id === undefined) {
+      return this.bookService.addBook( {
         ...submitData,
-        status : +submitData.status
+        status : +submitData.status,
+        img: submitData.img || this.book.img
       }).subscribe(data => {
         console.log(data);
         Swal.fire({
           icon: 'success',
-          title: 'Edit book information successfully',
+          title: 'Add book information successfully',
           showConfirmButton: false,
           timer: 1500
         }).then(()=> {
@@ -119,14 +120,14 @@ export class AdminProductFormComponent implements OnInit {
       })
     }
 
-    return this.bookService.addBook({
+    return this.bookService.updateBook(this.id,{
       ...submitData,
-      status : +submitData.status
+      status : +submitData.status  
     }).subscribe(data => {
       console.log(data);
       Swal.fire({
         icon: 'success',
-        title: 'Add new book successfully',
+        title: 'Edit new book successfully',
         showConfirmButton: false,
         timer: 1500
       }).then(()=> {

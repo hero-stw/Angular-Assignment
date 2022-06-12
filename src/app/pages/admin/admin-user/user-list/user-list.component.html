@@ -1,10 +1,10 @@
 <div class="flex items-center justify-between mb-8">
-  <h1 class="text-xl font-bold">Products List</h1>
+  <h1 class="text-xl font-bold">User List</h1>
   <a
     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-    routerLink="/admin/books/create"
+    routerLink="/admin/users/create"
   >
-    New book +
+    New user +
   </a>
 </div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -13,10 +13,8 @@
       class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
     >
       <tr>
-        <th scope="col" class="px-6 py-3">Name</th>
-        <th scope="col" class="px-6 py-3">Category</th>
-        <th scope="col" class="px-6 py-3">Price</th>
-        <th scope="col" class="px-6 py-3">Status</th>
+        <th scope="col" class="px-6 py-3">Email</th>
+        <th scope="col" class="py-3">Status</th>
         <th scope="col" class="px-6 py-3">
           <span class="sr-only">Edit</span>
         </th>
@@ -24,46 +22,41 @@
     </thead>
     <tbody>
       <tr
-        *ngFor="let book of books"
-        class=" border-b dark:bg-gray-800 dark:border-gray-700 {{
-          book.status == 1 ? 'bg-gray-100' : 'bg-white'
-        }}"
+        *ngFor="let user of users"
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
       >
         <th
           scope="row"
           class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap flex items-center justify-start gap-6"
         >
-          <img src="{{ book.img }}" alt="" class="max-w-[60px]" />
           <span class="text-md">
-            {{ book.title }}
+            {{ user.email }}
           </span>
         </th>
-        <td class="px-6 py-4">{{ getCategoryName(book.category) }}</td>
-        <td class="px-6 py-4">${{ book.price }}</td>
         <td>
           <select
-            id="stt-{{ book._id }}"
+            id="stt-{{ user._id }}"
             class="bg-transparent block max-w-[80px] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            [ngModel]="book.status"
-            (ngModelChange)="onChange($event, book._id)"
+            [ngModel]="user.role"
+            (ngModelChange)="onChange($event, user._id)"
           >
-            <option value="0" selected="{{ book.status === 0 ? true : false }}">
+            <option value="0" selected="{{ user.role === 0 ? true : false }}">
               Active
             </option>
-            <option value="1" selected="{{ book.status === 1 ? true : false }}">
+            <option value="1" selected="{{ user.role === 1 ? true : false }}">
               Inactive
             </option>
           </select>
         </td>
         <td class="px-6 py-4 text-right">
           <a
-            routerLink="/admin/books/{{ book._id }}"
+            routerLink="/admin/users/{{ user._id }}"
             class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
           >
             Edit
           </a>
           <button
-            (click)="deleteBook(book._id)"
+            (click)="deleteUser(user._id)"
             class="font-medium text-blue-600 dark:text-blue-500 hover:underline ml-4"
           >
             Delete

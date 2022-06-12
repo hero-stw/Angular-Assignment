@@ -1,7 +1,7 @@
 <div class="flex items-center justify-between mb-8">
   <h1 class="text-xl font-bold">
     {{ id === "" || id === undefined ? "Add" : "Edit" }}
-    Category
+    Users
   </h1>
 
   <nav
@@ -11,7 +11,7 @@
     <ol class="inline-flex items-center space-x-1 md:space-x-3">
       <li class="inline-flex items-center">
         <a
-          routerLink="/admin/category"
+          routerLink="/admin/users"
           class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
         >
           <svg
@@ -24,7 +24,7 @@
               d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
             ></path>
           </svg>
-          Category
+          Users
         </a>
       </li>
       <li aria-current="page">
@@ -43,7 +43,7 @@
           </svg>
           <span
             class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400"
-            >{{ cate.name }}</span
+            >{{ user.email }}</span
           >
         </div>
       </li>
@@ -51,56 +51,73 @@
   </nav>
 </div>
 <div class="flex gap-[90px]">
-  <form [formGroup]="cateForm" (ngSubmit)="onSubmit()" class="flex-1">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="flex-1">
     <div class="mb-6">
       <label
-        for="name"
+        for="email"
         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >Title</label
+        >Email</label
       >
       <input
-        type="text"
-        id="name"
+        type="email"
+        id="email"
         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-        placeholder="E.g Short Story"
+        placeholder="E.g abc@gmail.com"
         required=""
-        formControlName="name"
+        formControlName="email"
       />
       <app-validate-noti
-        [field]="cateForm.get('name')"
-        key="Category Name"
+        [field]="userForm.get('email')"
+        key="Email"
       ></app-validate-noti>
     </div>
     <div class="flex flex-col items-start mb-6">
       <label
-        for="status"
+        for="pass"
         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-        >Status</label
+        >Password</label
+      >
+      <input
+        type="password"
+        id="pass"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        formControlName="password"
+      />
+      <app-validate-noti
+        [field]="userForm.get('password')"
+        key="Password"
+      ></app-validate-noti>
+    </div>
+    <div class="flex flex-col items-start mb-6">
+      <label
+        for="role"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+        >Role</label
       >
       <select
-        id="status"
+        id="role"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        formControlName="status"
-        [value]="cateForm.value.status"
+        formControlName="role"
+        [value]="userForm.value.role"
       >
-        <option value="0" selected="{{ cate.status === 0 ? true : false }}">
-          Active
+        <option value="0" selected="{{ user.role === 0 ? true : false }}">
+          Admin
         </option>
-        <option value="1" selected="{{ cate.status === 1 ? true : false }}">
-          Inactive
+        <option value="1" selected="{{ user.role === 1 ? true : false }}">
+          User
         </option>
       </select>
       <app-validate-noti
-        [field]="cateForm.get('status')"
+        [field]="userForm.get('status')"
         key="Status"
       ></app-validate-noti>
     </div>
 
     <button
-      [disabled]="!cateForm.valid"
+      [disabled]="!userForm.valid"
       type="submit"
       class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 {{
-        !cateForm.valid ? 'bg-gray-500' : 'bg-blue-700'
+        !userForm.valid ? 'bg-gray-500' : 'bg-blue-700'
       }}"
     >
       Update

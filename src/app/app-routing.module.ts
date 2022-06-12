@@ -1,3 +1,4 @@
+import { UserFormComponent } from './pages/admin/admin-user/user-form/user-form.component';
 import { BookDetailComponent } from './pages/client/books/book-detail/book-detail.component';
 import { CartComponent } from './pages/client/cart/cart.component';
 import { BooksComponent } from './pages/client/books/books.component';
@@ -15,6 +16,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminVerifyGuard } from './guards/admin-verify.guard';
 import { CateListComponent } from './pages/admin/admin-category/cate-list/cate-list.component';
 import { CateFormComponent } from './pages/admin/admin-category/cate-form/cate-form.component';
+import { UserListComponent } from './pages/admin/admin-user/user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -84,6 +86,23 @@ const routes: Routes = [
           {
             path: ':_id',
             component: CateFormComponent
+          }
+        ]
+      },
+      {
+        path: 'users',
+        children: [
+          {
+            path: '',
+            component: UserListComponent
+          },
+          {
+            path: 'create',
+            component: UserFormComponent
+          },
+          {
+            path: ':_id',
+            component: UserFormComponent
           }
         ]
       }

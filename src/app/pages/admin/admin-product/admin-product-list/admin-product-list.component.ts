@@ -63,7 +63,33 @@ export class AdminProductListComponent implements OnInit {
       }
     })
    }
-
+   onChange(event: string, id: string) {
+    
+    Swal.fire({
+      title: 'Warning!!',
+      text: "Do you want to change this book's status?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Changed!',
+          'Your book"s status has been changed.',
+          'success'
+        )
+        var targetBook = this.books.find(book => book._id === id);
+        targetBook && this.bookService.updateBook(id, {
+          ...targetBook,
+          status: +event
+        }).subscribe(data => {
+          this.getBooks();
+        })
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.getBooks();

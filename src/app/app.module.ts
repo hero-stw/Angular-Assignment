@@ -24,6 +24,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CateListComponent } from './pages/admin/admin-category/cate-list/cate-list.component';
 import { CateFormComponent } from './pages/admin/admin-category/cate-form/cate-form.component';
+import { StatusSwitchComponent } from './components/admin/status-switch/status-switch.component';
+import { ValidateNotiComponent } from './components/admin/validate-noti/validate-noti.component';
+import { UserFormComponent } from './pages/admin/admin-user/user-form/user-form.component';
+import { UserListComponent } from './pages/admin/admin-user/user-list/user-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +49,11 @@ import { CateFormComponent } from './pages/admin/admin-category/cate-form/cate-f
     AuthLayoutComponent,
     ProductListComponent,
     CateListComponent,
-    CateFormComponent,  
+    CateFormComponent,
+    StatusSwitchComponent,
+    ValidateNotiComponent,
+    UserFormComponent,
+    UserListComponent,  
     
   ],
   imports: [

@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CateFormComponent implements OnInit {
   id: string;
   cateForm: FormGroup;
+  cate: BookCate;
 
   constructor(
     private categoryService: CategoryService, 
@@ -20,12 +21,14 @@ export class CateFormComponent implements OnInit {
   ) {
     this.id = '';
     this.cate = {
-      
+      _id: '',
+      name: '',
+      status: 0
     }
     this.cateForm = new FormGroup({
       name: new FormControl('',[
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(4),
         Validators.maxLength(50)
       ]),
       status : new FormControl('',[
@@ -37,11 +40,50 @@ export class CateFormComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activateRoute.snapshot.params['_id'];
     if(this.id) {
-      this.categoryService.getCateById(this.id).subscribe(data => {
-        this.
-        this.cateForm.patchValue(data);
+      this.categoryService.getCategory(this.id).subscribe(data => {
+        this.cate = data;
+        this.cateForm.patchValue({
+          name: this.cate.name,
+          status: this.cate.status
+        });
       })
     }
   }
+  getCategory() {
+    return this.categoryService.getCategory(this.id).subscribe(data => {
+      this.cate = data;
+    })
+  }
 
+  onSubmit() {
+    const submitData = this.cateForm.value;
+    if (this.id === '' || this.id === undefined) {
+      return this.categoryService.addCategory( {
+        ...submitData,
+        status: +submitData.status
+      }).subscribe(data => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Add category information successfully',
+          showConfirmButton: false,
+          timer: 1500
+        }).then(()=> {
+          this.router.navigate(['/admin/category']);
+        })
+      })
+    }
+    return this.categoryService.updateCategory(this.id,{
+      ...submitData,
+      status: +submitData.status
+    }).subscribe(data => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Edit category information successfully',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(()=> {
+        this.router.navigate(['/admin/category']);
+      })
+    })
+}
 }

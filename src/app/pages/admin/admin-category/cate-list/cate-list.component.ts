@@ -43,6 +43,33 @@ export class CateListComponent implements OnInit {
       }
     })
    }
+  onChange(event: string, id: string) {
+    
+    Swal.fire({
+      title: 'Warning!!',
+      text: "Do you want to change this category's status?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Changed!',
+          'Your category"s status has been changed.',
+          'success'
+        )
+        var targetCate = this.categories.find(category => category._id === id);
+        targetCate && this.categoryService.updateCategory(id, {
+          ...targetCate,
+          status: +event
+        }).subscribe(data => {
+          this.getCategories();
+        })
+      }
+    })
+  }
   ngOnInit(): void {
     this.getCategories();
   }

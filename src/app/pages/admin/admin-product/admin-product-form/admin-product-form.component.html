@@ -1,3 +1,52 @@
+<div class="flex items-center justify-between mb-8">
+  <h1 class="text-xl font-bold">Edit Books</h1>
+
+  <nav
+    class="flex {{ id === '' || id === undefined ? 'hidden' : '' }}"
+    aria-label="Breadcrumb"
+  >
+    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+      <li class="inline-flex items-center">
+        <a
+          routerLink="/admin/books"
+          class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+        >
+          <svg
+            class="mr-2 w-4 h-4"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+            ></path>
+          </svg>
+          Books
+        </a>
+      </li>
+      <li aria-current="page">
+        <div class="flex items-center">
+          <svg
+            class="w-6 h-6 text-gray-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <span
+            class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400"
+            >{{ book.title }}</span
+          >
+        </div>
+      </li>
+    </ol>
+  </nav>
+</div>
 <div class="flex gap-[90px]">
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="flex-1">
     <div class="mb-6">
@@ -14,6 +63,10 @@
         required=""
         formControlName="title"
       />
+      <app-validate-noti
+        [field]="productForm.get('title')"
+        key="Title"
+      ></app-validate-noti>
     </div>
     <div class="mb-6">
       <label
@@ -28,6 +81,10 @@
         required=""
         formControlName="price"
       />
+      <app-validate-noti
+        [field]="productForm.get('price')"
+        key="Price"
+      ></app-validate-noti>
     </div>
     <div class="mb-6">
       <label
@@ -42,6 +99,10 @@
         required=""
         formControlName="sale_price"
       />
+      <app-validate-noti
+        [field]="productForm.get('sale_price')"
+        key="Sale price"
+      ></app-validate-noti>
     </div>
     <div class="mb-6">
       <label
@@ -58,6 +119,10 @@
         [(ngModel)]="book.description"
       >
       </textarea>
+      <app-validate-noti
+        key="Description"
+        [field]="productForm.get('description')"
+      ></app-validate-noti>
     </div>
     <div class="flex flex-col items-start mb-6">
       <label
@@ -73,6 +138,10 @@
         formControlName="img"
         (change)="uploadHandler($event)"
       />
+      <app-validate-noti
+        [field]="productForm.get('img')"
+        key="Image"
+      ></app-validate-noti>
     </div>
     <div class="flex flex-col items-start mb-6">
       <label
@@ -94,6 +163,10 @@
           {{ item.name }}
         </option>
       </select>
+      <app-validate-noti
+        [field]="productForm.get('category')"
+        key="Category"
+      ></app-validate-noti>
     </div>
     <div class="flex flex-col items-start mb-6">
       <label
@@ -114,16 +187,30 @@
           Inactive
         </option>
       </select>
+      <app-validate-noti
+        [field]="productForm.get('status')"
+        key="Status"
+      ></app-validate-noti>
     </div>
 
     <button
+      [disabled]="!productForm.valid"
       type="submit"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      class="bg-gray-500 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 {{
+        !productForm.valid ? 'bg-gray-500' : 'bg-blue-700'
+      }}"
     >
       Update
     </button>
   </form>
   <div class="grid place-center overflow-hidden max-w-[500px] max-h-[500px]">
-    <img src="{{ book.img }}" alt="" class="object-cover" />
+    <img
+      [src]="
+        book.img ||
+        'https://cnctool.store/wp-content/uploads/woocommerce-placeholder.png'
+      "
+      alt=""
+      class="object-cover border-[1px] border-gray-300 rounded-lg"
+    />
   </div>
 </div>

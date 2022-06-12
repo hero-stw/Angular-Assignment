@@ -29,8 +29,8 @@ export class CategoryService {
     return this.http.post<BookCate>(environment.category, category);
   }
 
-  updateCategory(category: BookCate) : Observable<BookCate> {
-    return this.http.put<BookCate>(environment.category + '/' + category._id, category);
+  updateCategory(id: string, category: BookCate) : Observable<BookCate> {
+    return this.http.put<BookCate>(environment.category + '/' + id, category);
   }
 
 }
