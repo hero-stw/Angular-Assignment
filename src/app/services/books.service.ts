@@ -18,7 +18,7 @@ export class BooksService {
 
   }
   getBook(id: string):Observable<Book> {
-    return this.http.get<Book>(environment.books + '/' + id);
+    return this.http.get<Book>(`${environment.books}/${id}`);
   }
   // getBooksByCategory(category: string):Observable<Book[]> {
   //   return this.http.get<Book[]>(environment.books + '?category=' + category);

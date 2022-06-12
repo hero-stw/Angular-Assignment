@@ -12,11 +12,13 @@ import { ClientLayoutComponent } from './layouts/client-layout/client-layout.com
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminVerifyGuard } from './guards/admin-verify.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: ClientLayoutComponent,
+    canActivate: [AdminVerifyGuard],
     children: [
       {
         path: '',
@@ -30,7 +32,7 @@ const routes: Routes = [
             component: BooksComponent,
           },
           {
-            path: ':id',
+            path: ':_id',
             component: BookDetailComponent,
           }
         ]
@@ -46,7 +48,7 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       {
-        path: 'products',
+        path: 'books',
         children: [
           {
             path: '',
@@ -82,11 +84,16 @@ const routes: Routes = [
         component: SignupComponent,
       }
     ]
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AdminVerifyGuard]
 })
 export class AppRoutingModule { }
