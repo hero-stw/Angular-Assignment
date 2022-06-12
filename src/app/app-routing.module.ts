@@ -58,13 +58,13 @@ const routes: Routes = [
             path: 'create',
             component: AdminProductFormComponent,
           },
+          // {
+          //   path: 'edit/:id',
+          //   component: AdminProductFormComponent,
+          // },
           {
-            path: 'edit/:id',
+            path: ':_id',
             component: AdminProductFormComponent,
-          },
-          {
-            path: ':id',
-            component: AdminProductDetailComponent,
           },
         ]
       },

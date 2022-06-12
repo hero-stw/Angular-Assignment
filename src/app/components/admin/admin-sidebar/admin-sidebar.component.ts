@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSidebarComponent implements OnInit {
 
-  constructor() { }
+  userEmail : any;
+  constructor() {
+    this.userEmail = '';
+  }
+
+  getUserEmail() {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    
+    if (loggedInUser) {
+      this.userEmail = JSON.parse(loggedInUser).user.email;
+      
+    }
+  }
 
   ngOnInit(): void {
+    this.getUserEmail();
   }
 
 }

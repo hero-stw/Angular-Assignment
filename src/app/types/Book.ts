@@ -6,6 +6,7 @@ export type Book = {
     img: string,
     category: string,
     sale_price: number,
+    status: number,
 }
 
 export type BookInCart = {
@@ -16,5 +17,6 @@ export type BookInCart = {
     img: string,
     category: string,
     sale_price: number,
+    status: number,
     quantity: number,
 }

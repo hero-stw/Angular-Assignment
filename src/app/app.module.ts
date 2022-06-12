@@ -22,6 +22,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { ProductListComponent } from './components/client/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CKEditorModule
   ],
   providers: [
 

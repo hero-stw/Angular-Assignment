@@ -9,7 +9,8 @@ export const environment = {
 
   books: `${apiUrl}/books`,
   login: `${apiUrl}/login`,
-  signup: `${apiUrl}/signup`
+  signup: `${apiUrl}/signup`,
+  category: `${apiUrl}/category`
 };
 
 /*

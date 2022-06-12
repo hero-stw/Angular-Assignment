@@ -15,7 +15,7 @@ export class AdminVerifyGuard implements CanActivate {
     if (loggedInUser) {
       return true;
     }
-    this.router.navigateByUrl('/auth/login');
+    this.router.navigateByUrl('/auth/signin');
     return false;
   }
   

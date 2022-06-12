@@ -23,6 +23,7 @@ export class BookDetailComponent implements OnInit {
       img: '',
       category: '',
       description: '',
+      status: 0
     }
     this.cartQty = 0;
   } 
