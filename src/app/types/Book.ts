@@ -6,7 +6,8 @@ export type Book = {
     img: string,
     category: string ,
     sale_price: number ,
-    status: number
+    status: number,
+    quantity?: number
 }
 
 export type BookInCart = {

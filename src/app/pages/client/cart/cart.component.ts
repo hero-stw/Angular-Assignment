@@ -42,6 +42,27 @@ export class CartComponent implements OnInit {
   getTotalPrice() {
     return this.booksItem.reduce((a, b) => a + b.quantity * b.price, 0);
   }
-  
 
+  increaseQuantityOfBookInCart(id: string) {
+     var targetBook = this.booksItem.find(book => book._id === id)
+     targetBook && targetBook.quantity++;
+    localStorage.setItem('cart', JSON.stringify(this.booksItem));
+    this.cartItemQty = this.countNumberOfItemInCart();
+  }
+  
+  decreaseQuantityOfBookInCart(id: string) {
+    var targetBook = this.booksItem.find(book => book._id === id)
+    targetBook && targetBook.quantity--;
+    if (targetBook && targetBook.quantity === 0) {
+      this.removeBookFromCart(id);
+    }
+    localStorage.setItem('cart', JSON.stringify(this.booksItem));
+    this.cartItemQty = this.countNumberOfItemInCart();
+  }
+  removeBookFromCart(id: string) {
+    var targetBook = this.booksItem.find(book => book._id === id)
+    targetBook && this.booksItem.splice(this.booksItem.indexOf(targetBook), 1);
+    localStorage.setItem('cart', JSON.stringify(this.booksItem));
+    this.cartItemQty = this.countNumberOfItemInCart();
+  }
 }

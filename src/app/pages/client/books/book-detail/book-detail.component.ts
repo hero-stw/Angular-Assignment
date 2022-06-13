@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BooksService } from 'src/app/services/books.service';
 import { LocalStorageServicesService } from 'src/app/services/local-storage-services.service';
 import { Book } from 'src/app/types/Book';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-book-detail',
@@ -45,6 +46,13 @@ export class BookDetailComponent implements OnInit {
       quantity: +this.cartQty
     };
     this.lsService.setItem(addItem);
+    Swal.fire({
+      title: 'Success',
+      text: 'Add to cart successfully',
+      icon: 'success',
+      confirmButtonText: 'Ok',
+      showCancelButton: true,
+    })
     this.cartQty = 1;
   }
 }
