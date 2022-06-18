@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { LocalStorageServicesService } from 'src/app/services/local-storage-services.service';
+import { BookInCart } from 'src/app/types/Book';
 
 @Component({
   selector: 'app-client-header',
@@ -7,12 +8,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./client-header.component.css']
 })
 export class ClientHeaderComponent implements OnInit {
-
+  booksItem: BookInCart[];
+  cartItemQty: number = 0;
   constructor(
-    private router: Router
-  ) { }
-
+    private lsService: LocalStorageServicesService
+  ) {
+    this.booksItem= []
+   }
+   onSetCart() {
+    this.booksItem = this.lsService.getItem(); 
+  }
   ngOnInit(): void {
+    this.onSetCart();
+  }
+  countNumberOfItemInCart() {
+    return this.lsService.countNumberOfItemInCart();
   }
 
   

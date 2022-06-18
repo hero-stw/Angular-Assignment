@@ -29,11 +29,6 @@ export class UserFormComponent implements OnInit {
       role: 0
     }
     this.userForm = new FormGroup({
-      name: new FormControl('',[
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(50)
-      ]),
       email: new FormControl('',[
         Validators.required,
         Validators.minLength(4),
@@ -44,6 +39,9 @@ export class UserFormComponent implements OnInit {
         Validators.required,
       ]),
       role: new FormControl('',[
+        Validators.required,
+      ]),
+      status: new FormControl('',[
         Validators.required,
       ])
     })

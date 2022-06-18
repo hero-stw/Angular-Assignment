@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { LocalStorageServicesService } from 'src/app/services/local-storage-services.service';
 import { BookInCart } from 'src/app/types/Book';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -25,7 +26,6 @@ export class CartComponent implements OnInit {
   }
   onSetCart() {
     this.booksItem = this.lsService.getItem(); 
-    this.cartItemQty = this.booksItem.reduce((a, b) => a + b.quantity, 0);
   }
   getCategories() {
     this.categoryService.getCategories().subscribe(data => {
@@ -53,16 +53,43 @@ export class CartComponent implements OnInit {
   decreaseQuantityOfBookInCart(id: string) {
     var targetBook = this.booksItem.find(book => book._id === id)
     targetBook && targetBook.quantity--;
-    if (targetBook && targetBook.quantity === 0) {
-      this.removeBookFromCart(id);
+    if (targetBook && targetBook.quantity < 1) {  
+          this.removeBookFromCart(id);
+    } else {
+      localStorage.setItem('cart', JSON.stringify(this.booksItem));
     }
-    localStorage.setItem('cart', JSON.stringify(this.booksItem));
     this.cartItemQty = this.countNumberOfItemInCart();
   }
   removeBookFromCart(id: string) {
-    var targetBook = this.booksItem.find(book => book._id === id)
-    targetBook && this.booksItem.splice(this.booksItem.indexOf(targetBook), 1);
-    localStorage.setItem('cart', JSON.stringify(this.booksItem));
-    this.cartItemQty = this.countNumberOfItemInCart();
+    Swal.fire({
+      title: 'Do you want to remove this book out of cart?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, remove it!'
+    }).then((result) => {
+      
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Removed!',
+          'Your book has been removed.',
+          'success'
+        )
+        var targetBook = this.booksItem.find(book => book._id === id)
+        targetBook && this.booksItem.splice(this.booksItem.indexOf(targetBook), 1);
+        localStorage.setItem('cart', JSON.stringify(this.booksItem));
+        this.cartItemQty = this.countNumberOfItemInCart();
+      } else {
+        Swal.fire(
+          'Cancelled',
+          'Your book is safe :)',
+          'error'
+        )
+        this.cartItemQty = this.countNumberOfItemInCart();
+      }
+    })
+    
   }
 }

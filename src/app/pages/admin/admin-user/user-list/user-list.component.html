@@ -15,6 +15,7 @@
       <tr>
         <th scope="col" class="px-6 py-3">Email</th>
         <th scope="col" class="py-3">Status</th>
+        <th scope="col" class="py-3">Role</th>
         <th scope="col" class="px-6 py-3">
           <span class="sr-only">Edit</span>
         </th>
@@ -47,6 +48,9 @@
               Inactive
             </option>
           </select>
+        </td>
+        <td class="px-6 py-4 text-right">
+          {{ user.role === 0 ? "Admin" : "Client" }}
         </td>
         <td class="px-6 py-4 text-right">
           <a

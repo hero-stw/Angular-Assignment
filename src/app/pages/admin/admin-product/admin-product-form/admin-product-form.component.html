@@ -116,7 +116,6 @@
         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Leave a comment..."
         formControlName="description"
-        [(ngModel)]="book.description"
       >
       </textarea>
       <app-validate-noti
@@ -153,12 +152,11 @@
         id="category"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         formControlName="category"
-        [ngModel]="book.category"
       >
         <option
           *ngFor="let item of categories"
           value="{{ item._id }}"
-          selected="{{ item._id === book.category ? true : false }}"
+          [selected]="item._id === productForm.value.category ? true : false"
         >
           {{ item.name }}
         </option>
@@ -168,6 +166,7 @@
         key="Category"
       ></app-validate-noti>
     </div>
+
     <div class="flex flex-col items-start mb-6">
       <label
         for="status"
@@ -178,12 +177,17 @@
         id="status"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         formControlName="status"
-        [value]="productForm.value.status"
       >
-        <option value="0" selected="{{ book.status === 0 ? true : false }}">
+        <option
+          value="0"
+          selected="{{ productForm.value.status === 0 ? true : false }}"
+        >
           Active
         </option>
-        <option value="1" selected="{{ book.status === 1 ? true : false }}">
+        <option
+          value="1"
+          selected="{{ productForm.value.status === 1 ? true : false }}"
+        >
           Inactive
         </option>
       </select>
@@ -194,10 +198,9 @@
     </div>
 
     <button
-      [disabled]="!productForm.valid"
       type="submit"
       class="bg-gray-500 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 {{
-        !productForm.valid ? 'bg-gray-500' : 'bg-blue-700'
+        productForm.valid ? 'bg-blue-800' : 'bg-gray-500'
       }}"
     >
       Update

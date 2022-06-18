@@ -1,16 +1,16 @@
-<div class="bg-white px-4">
+<div *ngFor="let cate of cates" class="bg-white px-4">
   <div
     class="max-w-full mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-full lg:px-0"
   >
     <h2 class="text-[24px] font-[600] font-Joan tracking-tight text-gray-900">
-      Feature books of the day
+      {{ cate.name }}
     </h2>
 
     <div
       class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
     >
-      <div *ngFor="let book of books" class="group relative">
-        <a routerLink="/books/{{ book._id }}">
+      <div *ngFor="let book of getBooksInCate(cate._id)" class="group relative">
+        <a routerLink="/cates/{{ book._id }}">
           <div
             class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none"
           >

@@ -28,6 +28,7 @@ import { StatusSwitchComponent } from './components/admin/status-switch/status-s
 import { ValidateNotiComponent } from './components/admin/validate-noti/validate-noti.component';
 import { UserFormComponent } from './pages/admin/admin-user/user-form/user-form.component';
 import { UserListComponent } from './pages/admin/admin-user/user-list/user-list.component';
+import { CategoriesComponent } from './components/client/categories/categories.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,8 @@ import { UserListComponent } from './pages/admin/admin-user/user-list/user-list.
     StatusSwitchComponent,
     ValidateNotiComponent,
     UserFormComponent,
-    UserListComponent,  
+    UserListComponent,
+    CategoriesComponent,  
     
   ],
   imports: [

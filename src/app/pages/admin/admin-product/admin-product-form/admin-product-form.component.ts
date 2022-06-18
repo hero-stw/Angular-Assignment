@@ -58,7 +58,7 @@ export class AdminProductFormComponent implements OnInit {
       ]),
       img: new FormControl('',
       [
-        Validators.required,
+        // Validators.required,
       ]),
       category: new FormControl('',[
 

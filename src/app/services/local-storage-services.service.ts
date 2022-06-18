@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { BookInCart } from '../types/Book';
+import { Book, BookInCart } from '../types/Book';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,14 @@ export class LocalStorageServicesService {
   getItem() {
     return JSON.parse(localStorage.getItem('cart') || '[]');
   }
+  countNumberOfItemInCart() {
+    return this.getItem().reduce((a:any, b:any) => a + b.quantity, 0);
+  }
+  increaseQuantityOfBookInCart(id: string) {
+    var targetBook = this.getItem().find((book:any) => book._id === id)
+    targetBook && targetBook.quantity++;
+   this.setItem(targetBook);
+ }
   setItem(addItem:BookInCart) {
 
     const cartItems = this.getItem();
