@@ -18,3 +18,15 @@
   {{ key }} requires maximum of
   {{field.errors?.['maxlength'].requiredLength}} characters.
 </span>
+<span
+  *ngIf="(field.dirty || field.touched) && field.errors?.['email']"
+  class="mt-2 text-sm text-red-600 dark:text-red-500 font-medium"
+>
+  {{ key }} doesn't has valid format
+</span>
+<span
+  *ngIf="(field.dirty || field.touched) && field.errors?.['pattern']"
+  class="mt-2 text-sm text-red-600 dark:text-red-500 font-medium"
+>
+  {{ key }} doesn't has valid format
+</span>

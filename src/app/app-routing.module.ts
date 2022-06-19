@@ -1,3 +1,4 @@
+import { CheckoutComponent } from './pages/client/checkout/checkout.component';
 import { UserFormComponent } from './pages/admin/admin-user/user-form/user-form.component';
 import { BookDetailComponent } from './pages/client/books/book-detail/book-detail.component';
 import { CartComponent } from './pages/client/cart/cart.component';
@@ -17,12 +18,15 @@ import { AdminVerifyGuard } from './guards/admin-verify.guard';
 import { CateListComponent } from './pages/admin/admin-category/cate-list/cate-list.component';
 import { CateFormComponent } from './pages/admin/admin-category/cate-form/cate-form.component';
 import { UserListComponent } from './pages/admin/admin-user/user-list/user-list.component';
+import { ThankYouComponent } from './pages/client/thank-you/thank-you.component';
+import { AdminOrderListComponent } from './pages/admin/admin-order/admin-order-list/admin-order-list.component';
+import { AdminOrderDetailComponent } from './pages/admin/admin-order/admin-order-detail/admin-order-detail.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ClientLayoutComponent,
-    canActivate: [AdminVerifyGuard],
+    
     children: [
       {
         path: '',
@@ -44,11 +48,20 @@ const routes: Routes = [
       {
         path: 'cart',
         component: CartComponent,
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent
+      },
+      {
+        path: 'thank-you',
+        component: ThankYouComponent
       }
     ]
   },
   {
     path: 'admin',
+    canActivate: [AdminVerifyGuard],
     component: AdminLayoutComponent,
     children: [
       {
@@ -105,6 +118,19 @@ const routes: Routes = [
             component: UserFormComponent
           }
         ]
+      },
+      {
+        path: 'orders',
+        children: [
+          {
+            path: '',
+            component: AdminOrderListComponent
+          },
+          {
+            path: ':_id',
+            component: AdminOrderDetailComponent
+          }
+        ]
       }
     ]
   },
@@ -122,10 +148,6 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'cart',
-    component: CartComponent,
-  }
 ];
 
 @NgModule({

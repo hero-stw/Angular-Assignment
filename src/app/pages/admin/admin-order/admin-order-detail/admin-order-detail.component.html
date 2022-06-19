@@ -1,0 +1,181 @@
+<!-- component -->
+<section class="bg-gray-100 py-20">
+  <div class="text-center">
+    <h1 class="mx-auto text-[2rem] font-extrabold">Order Detail</h1>
+    <p>No {{ order._id }}</p>
+  </div>
+  <div class="max-w-2xl mx-auto py-0 md:py-16" id="invoice">
+    <article class="shadow-none md:shadow-md md:rounded-md overflow-hidden">
+      <div class="md:rounded-b-md bg-white">
+        <div class="p-9 border-b border-gray-200">
+          <div class="space-y-6">
+            <div class="flex justify-between items-top">
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-start gap-2 items-center mb-4">
+                    <img
+                      src="https://res.cloudinary.com/ecma-assignment/image/upload/v1654681748/Jsadvanced/kisspng-scythe-don-t-get-caught-book-computer-icons-clip-a-store-shelf-5ab9e4f06770b8.6841994915221322084237_xqiis3.png"
+                      class="mr-3 h-6 sm:h-9 rounded-full"
+                      alt="Flowbite Logo"
+                    />
+                    <span
+                      class="self-center text-xl text-black font-semibold whitespace-nowrap dark:text-black"
+                      >Bookaholic</span
+                    >
+                  </div>
+                  <p class="font-bold text-lg">Invoice</p>
+                </div>
+                <div>
+                  <p class="font-medium text-sm text-gray-400">Billed To</p>
+                  <p>{{ order.shippingInfo.fullname }}</p>
+                  <p>{{ order.shippingInfo.email }}</p>
+                  <p>{{ order.shippingInfo.phoneNumber }}</p>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div>
+                  <!-- <p class="font-medium text-sm text-gray-400">
+                      Invoice Number
+                    </p>
+                    <p>INV-MJ0001</p> -->
+                </div>
+                <div>
+                  <p class="font-medium text-sm text-gray-400">Order Date</p>
+                  <p></p>
+                </div>
+                <!-- <div>
+                    <p class="font-medium text-sm text-gray-400">ABN</p>
+                    <p>57 630 182 446</p>
+                  </div> -->
+                <div>
+                  <button
+                    (click)="exportPdf()"
+                    target="_blank"
+                    class="inline-flex items-center text-sm font-medium text-blue-500 hover:opacity-75"
+                  >
+                    Download PDF
+                    <svg
+                      class="ml-0.5 h-4 w-4 fill-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
+                      ></path>
+                      <path
+                        d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-9 border-b border-gray-200">
+          <p class="font-medium text-sm text-gray-400">Note</p>
+          <p class="text-sm">
+            {{ order.shippingInfo.note ? order.shippingInfo.note : "Nothing" }}
+          </p>
+        </div>
+        <table class="w-full divide-y divide-gray-200 text-sm">
+          <thead>
+            <tr>
+              <th
+                scope="col"
+                class="px-9 py-4 text-left font-semibold text-gray-400"
+              >
+                Item
+              </th>
+              <th
+                scope="col"
+                class="py-3 text-left font-semibold text-gray-400"
+              ></th>
+              <th
+                scope="col"
+                class="py-3 text-left font-semibold text-gray-400"
+              >
+                Price
+              </th>
+              <th
+                scope="col"
+                class="py-3 text-left font-semibold text-gray-400"
+              >
+                Quantity
+              </th>
+              <th
+                scope="col"
+                class="py-3 text-left font-semibold text-gray-400"
+              ></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr *ngFor="let item of booksInOrder">
+              <td
+                class="px-9 py-5 whitespace-nowrap space-x-1 flex items-center"
+              >
+                <div>
+                  <p>{{ item?.info.title }}</p>
+                  <p class="text-sm text-gray-400">
+                    {{ getCategoryName(item?.info.category) }}
+                  </p>
+                </div>
+              </td>
+              <td class="whitespace-nowrap text-gray-600 truncate"></td>
+              <td class="whitespace-nowrap text-gray-600 truncate">
+                ${{ item?.info.price }}
+              </td>
+              <td class="whitespace-nowrap text-gray-600 truncate">
+                {{ item?.quantity }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="p-9 border-b border-gray-200">
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <div>
+                <p class="text-gray-500 text-sm">Subtotal</p>
+              </div>
+              <p class="text-gray-500 text-sm">${{ order.price }}</p>
+            </div>
+            <div class="flex justify-between">
+              <div>
+                <p class="text-gray-500 text-sm">Tax</p>
+              </div>
+              <p class="text-gray-500 text-sm">$0.00</p>
+            </div>
+            <div class="flex justify-between">
+              <div>
+                <p class="text-gray-500 text-sm">Total</p>
+              </div>
+              <p class="text-gray-500 text-sm">${{ order.price }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-9 border-b border-gray-200">
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <div>
+                <p class="font-bold text-black text-lg">Amount Due</p>
+              </div>
+              <p class="font-bold text-black text-lg">${{ order.price }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="text-center">
+    <h3 class="mx-auto text-[1rem] flex items-center justify-center">
+      <svg class="fill-current mr-2 text-black w-4" viewBox="0 0 448 512">
+        <path
+          d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"
+        />
+      </svg>
+      <a routerLink="/">Back to home page</a>
+    </h3>
+  </div>
+</section>

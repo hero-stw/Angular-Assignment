@@ -37,5 +37,11 @@ export class LocalStorageServicesService {
     localStorage.setItem('cart', JSON.stringify(cartItems));
     this.storageSubject.next('');
   }
+  setInvoice(invoice: any) {
+    localStorage.setItem('invoice', JSON.stringify(invoice));
+  }
+  getInvoice(){
+    return JSON.parse(localStorage.getItem('invoice') || '[]');
+  }
   constructor() { }
 }

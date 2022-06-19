@@ -35,5 +35,6 @@ export class AdminProductDetailComponent implements OnInit {
       console.log(data);
     })
   }
+  
 
 }

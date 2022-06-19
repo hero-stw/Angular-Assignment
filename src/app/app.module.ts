@@ -29,6 +29,11 @@ import { ValidateNotiComponent } from './components/admin/validate-noti/validate
 import { UserFormComponent } from './pages/admin/admin-user/user-form/user-form.component';
 import { UserListComponent } from './pages/admin/admin-user/user-list/user-list.component';
 import { CategoriesComponent } from './components/client/categories/categories.component';
+import { CheckoutComponent } from './pages/client/checkout/checkout.component';
+import { LoadingComponent } from './components/client/loading/loading.component';
+import { ThankYouComponent } from './pages/client/thank-you/thank-you.component';
+import { AdminOrderDetailComponent } from './pages/admin/admin-order/admin-order-detail/admin-order-detail.component';
+import { AdminOrderListComponent } from './pages/admin/admin-order/admin-order-list/admin-order-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +60,12 @@ import { CategoriesComponent } from './components/client/categories/categories.c
     ValidateNotiComponent,
     UserFormComponent,
     UserListComponent,
-    CategoriesComponent,  
+    CategoriesComponent,
+    CheckoutComponent,
+    LoadingComponent,
+    ThankYouComponent,
+    AdminOrderDetailComponent,
+    AdminOrderListComponent,  
     
   ],
   imports: [

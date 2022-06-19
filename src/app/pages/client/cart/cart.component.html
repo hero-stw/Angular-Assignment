@@ -132,7 +132,7 @@
         />
       </div>
       <button
-        class="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase"
+        class="bg-black hover:bg-[#e8a535] px-5 py-2 text-sm text-white uppercase"
       >
         Apply
       </button>
@@ -141,11 +141,12 @@
           <span>Total cost</span>
           <span>${{ getTotalPrice() }}</span>
         </div>
-        <button
-          class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
+        <a
+          routerLink="/checkout"
+          class="bg-[#e8a535] font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full block text-center"
         >
           Checkout
-        </button>
+        </a>
       </div>
     </div>
   </div>

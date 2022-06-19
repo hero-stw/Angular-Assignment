@@ -1,0 +1,226 @@
+<div class="container p-12 mx-auto relative">
+  <div class="flex flex-col w-full px-0 mx-auto md:flex-row">
+    <div class="flex flex-col md:w-full">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="font-bold md:text-xl text-heading">Shipping Address</h2>
+        <a
+          routerLink="/cart"
+          class="flex font-semibold text-indigo-600 text-sm"
+        >
+          <svg
+            class="fill-current mr-2 text-indigo-600 w-4"
+            viewBox="0 0 448 512"
+          >
+            <path
+              d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"
+            />
+          </svg>
+          Back to cart
+        </a>
+      </div>
+      <form
+        class="justify-center w-full mx-auto"
+        [formGroup]="checkoutForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="">
+          <div class="space-x-0 lg:flex lg:space-x-4">
+            <div class="w-full">
+              <label
+                for="fullName"
+                class="block mb-3 text-sm font-semibold text-gray-500"
+                >Full name</label
+              >
+              <input
+                name="fullName"
+                type="text"
+                placeholder="E.g Pham Anh Hung"
+                class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                formControlName="fullname"
+                required=""
+              />
+              <app-validate-noti
+                [field]="checkoutForm.get('fullname')"
+                key="Fullname"
+              ></app-validate-noti>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="w-full">
+              <label
+                for="Email"
+                class="block mb-3 text-sm font-semibold text-gray-500"
+                >Email</label
+              >
+              <input
+                name="email"
+                type="email"
+                placeholder="johndoe@gmail.com"
+                class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                formControlName="email"
+                required=""
+              />
+              <app-validate-noti
+                [field]="checkoutForm.get('email')"
+                key="Email"
+              ></app-validate-noti>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="w-full">
+              <label
+                for="Phone"
+                class="block mb-3 text-sm font-semibold text-gray-500"
+                >Phone</label
+              >
+              <input
+                name="Phone"
+                type="tel"
+                placeholder="E.g: 0987654321"
+                class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                formControlName="phone"
+              />
+              <app-validate-noti
+                [field]="checkoutForm.get('phone')"
+                key="Phone number"
+              ></app-validate-noti>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="w-full">
+              <label
+                for="Address"
+                class="block mb-3 text-sm font-semibold text-gray-500"
+                >Address</label
+              >
+              <textarea
+                class="w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                name="Address"
+                cols="20"
+                rows="4"
+                placeholder="Address"
+                formControlName="address"
+              ></textarea>
+              <app-validate-noti
+                [field]="checkoutForm.get('address')"
+                key="Address"
+              ></app-validate-noti>
+            </div>
+          </div>
+          <!-- <div class="flex items-center mt-4">
+            <label class="flex items-center text-sm group text-heading">
+              <input
+                type="checkbox"
+                class="w-5 h-5 border border-gray-300 rounded focus:outline-none focus:ring-1"
+              />
+              <span class="ml-2"
+                >Save this information for next time</span
+              ></label
+            >
+          </div> -->
+          <div class="relative pt-3 xl:pt-6">
+            <label
+              for="note"
+              class="block mb-3 text-sm font-semibold text-gray-500"
+            >
+              Notes (Optional)</label
+            ><textarea
+              name="note"
+              class="flex items-center w-full px-4 py-3 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-600"
+              rows="4"
+              placeholder="Notes for delivery"
+            ></textarea>
+          </div>
+          <div class="mt-4">
+            <button
+              type="submit"
+              [disabled]="!checkoutForm.valid"
+              class="w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900 {{
+                checkoutForm.valid
+                  ? ''
+                  : 'opacity-50 cursor-not-allowed bg-slate-500'
+              }}"
+            >
+              Process
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="flex flex-col w-full ml-0 lg:ml-12 lg:w-2/5">
+      <div class="pt-12 md:pt-0 2xl:ps-4">
+        <h2 class="text-xl font-bold">Order Summary</h2>
+        <div class="mt-8">
+          <div class="flex flex-col space-y-8">
+            <div *ngFor="let book of booksItem" class="flex space-x-4">
+              <div
+                class="max-h-[80px] max-w-[120px] object-cover overflow-hidden"
+              >
+                <img src="{{ book.img }}" alt="image" class="w-60" />
+              </div>
+              <div class="flex justify-between items-start flex-1">
+                <div>
+                  <h2 class="text-md font-bold">{{ book.title }}</h2>
+                  <p class="text-sm">{{ getCategoryName(book.category) }}</p>
+                  <span class="text-[#e8a535]">${{ book.price }}</span
+                  ><span> x {{ book.quantity }}</span>
+                </div>
+                <button (click)="removeBookFromCart(book._id)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6 hover:text-[#e8a535]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-5" />
+        <div>
+          <label class="font-medium inline-block mb-3 text-sm uppercase"
+            >Shipping</label
+          >
+          <select class="block p-2 text-gray-600 w-full text-sm">
+            <option>Standard shipping - $10.00</option>
+          </select>
+        </div>
+        <div class="py-4">
+          <label
+            for="promo"
+            class="font-semibold inline-block mb-3 text-sm uppercase"
+            >Promo Code</label
+          >
+          <input
+            type="text"
+            id="promo"
+            placeholder="Enter your code"
+            class="p-2 text-sm w-full"
+          />
+        </div>
+        <button
+          class="bg-black hover:bg-[#e8a535] px-5 py-2 text-sm text-white uppercase"
+        >
+          Apply
+        </button>
+        <div class="border-t mt-8">
+          <div
+            class="flex font-semibold justify-between py-6 text-sm uppercase"
+          >
+            <span>Total cost</span>
+            <span>${{ getTotalPrice() }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

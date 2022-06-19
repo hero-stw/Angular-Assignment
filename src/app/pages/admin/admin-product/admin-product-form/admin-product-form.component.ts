@@ -47,12 +47,12 @@ export class AdminProductFormComponent implements OnInit {
         Validators.minLength(6),
         Validators.maxLength(50)
       ]),
-      price: new FormControl('',
+      price: new FormControl(0,
       [
         Validators.required,
         Validators.min(0)
       ]),
-      sale_price: new FormControl('',
+      sale_price: new FormControl(0,
       [
         Validators.min(0),
       ]),
@@ -68,7 +68,7 @@ export class AdminProductFormComponent implements OnInit {
         Validators.minLength(10),
         Validators.maxLength(1000)
       ]),
-      status: new FormControl('',[
+      status: new FormControl(0,[
         Validators.required,
       ])
     })
@@ -116,6 +116,9 @@ export class AdminProductFormComponent implements OnInit {
           timer: 1500
         }).then(()=> {
           this.router.navigate(['/admin/books']);
+        }).catch(err => {
+          console.log(err);
+          
         })
       })
     }
