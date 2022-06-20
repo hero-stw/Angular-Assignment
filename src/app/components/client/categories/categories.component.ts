@@ -32,7 +32,7 @@ export class CategoriesComponent implements OnInit {
     })
   }
   getBooksInCate(cateId: string) {
-    return this.booksInCate =  this.books.filter(book => book.category === cateId && book.status === 1);
+    return this.booksInCate =  this.books.filter(book => book.category === cateId && book.status === 0);
   }
   getCategoryName(categoryId: string) {
     return this.cates.find(category => category._id === categoryId)?.name;

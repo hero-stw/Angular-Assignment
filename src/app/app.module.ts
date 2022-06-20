@@ -34,6 +34,8 @@ import { LoadingComponent } from './components/client/loading/loading.component'
 import { ThankYouComponent } from './pages/client/thank-you/thank-you.component';
 import { AdminOrderDetailComponent } from './pages/admin/admin-order/admin-order-detail/admin-order-detail.component';
 import { AdminOrderListComponent } from './pages/admin/admin-order/admin-order-list/admin-order-list.component';
+import { ShopComponent } from './pages/client/shop/shop.component';
+import { SearchComponent } from './components/client/search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +67,9 @@ import { AdminOrderListComponent } from './pages/admin/admin-order/admin-order-l
     LoadingComponent,
     ThankYouComponent,
     AdminOrderDetailComponent,
-    AdminOrderListComponent,  
+    AdminOrderListComponent,
+    ShopComponent,
+    SearchComponent,  
     
   ],
   imports: [
